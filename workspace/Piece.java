@@ -1,4 +1,6 @@
 
+//David Sagoua Period: 2
+//This class store the informantio for the piece like it's color, image, and the way it can move
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -27,9 +29,6 @@ public class Piece {
           }
     }
     
-    
-
-    
     public boolean getColor() {
         return color;
     }
@@ -45,22 +44,214 @@ public class Piece {
         g.drawImage(this.img, x, y, null);
     }
     
-    
-    // TO BE IMPLEMENTED!
-    //return a list of every square that is "controlled" by this piece. A square is controlled
-    //if the piece capture into it legally.
-    public ArrayList<Square> getControlledSquares(Square[][] board, Square start) {
-     return null;
-    }
-    
-
-    //TO BE IMPLEMENTED!
-    //implement the move function here
-    //it's up to you how the piece moves, but at the very least the rules should be logical and it should never move off the board!
-    //returns an arraylist of squares which are legal to move to
-    //please note that your piece must have some sort of logic. Just being able to move to every square on the board is not
-    //going to score any points.
+    //makes a list of all the legal moves that the piece can make
+    //pre-condition: board must exist and have squares
+    //post-condition: return an arraylist of legal moves
     public ArrayList<Square> getLegalMoves(Board b, Square start){
-    	return null;
+       ArrayList<Square> legalMoves = new ArrayList<Square>();
+      int firstAxis = 2;
+      int secondAxis = 1;
+      if (start.getRow() + 2 < 8) 
+      {
+        //Standard L shaped move
+        if (start.getCol() + 1 < 8) 
+        {
+          if (b.getSquareArray()[start.getRow() + firstAxis][start.getCol() + secondAxis].isOccupied() == true)
+          {
+            if (b.getSquareArray()[start.getRow() + firstAxis][start.getCol() + secondAxis].getOccupyingPiece().getColor() != this.getColor())
+            {
+              legalMoves.add(b.getSquareArray()[start.getRow() + firstAxis][start.getCol() + secondAxis]);//row +2 col +1
+            }
+          }
+          else 
+          {
+            legalMoves.add(b.getSquareArray()[start.getRow() + firstAxis][start.getCol() + secondAxis]);//row +2 col +1
+          }
+        }
+        //Standard backwards L shaped move
+        if (start.getCol() - 1 >= 0) 
+        {
+          if (b.getSquareArray()[start.getRow() + firstAxis][start.getCol() - secondAxis].isOccupied() == true)
+          {
+            if (b.getSquareArray()[start.getRow() + firstAxis][start.getCol() - secondAxis].getOccupyingPiece().getColor() != this.getColor())
+            {
+              legalMoves.add(b.getSquareArray()[start.getRow() + firstAxis][start.getCol() - secondAxis]);//row +2 col -1
+            }
+          }
+          else 
+          {
+            legalMoves.add(b.getSquareArray()[start.getRow() + firstAxis][start.getCol() - secondAxis]);//row +2 col -1
+          }
+        }
+      }
+      if(start.getRow() + 1 < 8)
+      {
+        //Standard backwards L shaped rotated 90 degrees clockwise move
+        if (start.getCol() + 2 < 8) 
+        {
+          if (b.getSquareArray()[start.getRow() + secondAxis][start.getCol() + firstAxis].isOccupied() == true)
+          {
+            if (b.getSquareArray()[start.getRow() + secondAxis][start.getCol() + firstAxis].getOccupyingPiece().getColor() != this.getColor())
+            {
+              legalMoves.add(b.getSquareArray()[start.getRow() + secondAxis][start.getCol() + firstAxis]);//row +1 col +2
+            }
+          }
+          else 
+          {
+            legalMoves.add(b.getSquareArray()[start.getRow() + secondAxis][start.getCol() + firstAxis]);//row +1 col +2
+          }
+        }
+        //Standard L shaped rotated 90 degrees counterclockwise move
+        if (start.getCol() - 2 >= 0) 
+        {
+          if (b.getSquareArray()[start.getRow() + secondAxis][start.getCol() - firstAxis].isOccupied() == true)
+          {
+            if (b.getSquareArray()[start.getRow() + secondAxis][start.getCol() - firstAxis].getOccupyingPiece().getColor() != this.getColor())
+            {
+              legalMoves.add(b.getSquareArray()[start.getRow() + secondAxis][start.getCol() - firstAxis]);//row +1 col -2
+            }
+          }
+          else 
+          {
+            legalMoves.add(b.getSquareArray()[start.getRow() + secondAxis][start.getCol() - firstAxis]);//row +1 col -2
+          }
+        }                    
+      }
+
+      if (start.getRow() - 1 >= 0) 
+      {
+        //Standard L shaped rotated 90 degrees clockwise move
+        if (start.getCol() + 2 < 8) 
+        {
+          if (b.getSquareArray()[start.getRow() - secondAxis][start.getCol() + firstAxis].isOccupied() == true)
+          {
+            if (b.getSquareArray()[start.getRow() - secondAxis][start.getCol() + firstAxis].getOccupyingPiece().getColor() != this.getColor())
+            {
+              legalMoves.add(b.getSquareArray()[start.getRow() - secondAxis][start.getCol() + firstAxis]);//row -1 col +2
+            }
+          }
+          else 
+          {
+            legalMoves.add(b.getSquareArray()[start.getRow() - secondAxis][start.getCol() + firstAxis]);//row -1 col +2
+          }
+        }
+        //Standard backwards L shaped rotated 90 degrees counterclockwise move
+        if (start.getCol() - 2 >= 0) 
+        {
+          if (b.getSquareArray()[start.getRow() - secondAxis][start.getCol() - firstAxis].isOccupied() == true)
+          {
+            if (b.getSquareArray()[start.getRow() - secondAxis][start.getCol() - firstAxis].getOccupyingPiece().getColor() != this.getColor())
+            {
+              legalMoves.add(b.getSquareArray()[start.getRow() - secondAxis][start.getCol() - firstAxis]);//row -1 col -2
+            }
+          }
+          else 
+          {
+            legalMoves.add(b.getSquareArray()[start.getRow() - secondAxis][start.getCol() - firstAxis]);//row -1 col -2
+          }
+        }
+      }
+
+      if (start.getRow() - 2 >= 0) 
+      {
+        //Standard L shaped flipped upside down move
+        if (start.getCol() + 1 < 8) 
+        {
+          if (b.getSquareArray()[start.getRow() - firstAxis][start.getCol() + secondAxis].isOccupied() == true)
+          {
+            if (b.getSquareArray()[start.getRow() - firstAxis][start.getCol() + secondAxis].getOccupyingPiece().getColor() != this.getColor())
+            {
+              legalMoves.add(b.getSquareArray()[start.getRow() - firstAxis][start.getCol() + secondAxis]);//row -2 col +1
+            }
+          }
+          else 
+          {
+            legalMoves.add(b.getSquareArray()[start.getRow() - firstAxis][start.getCol() + secondAxis]);//row -2 col +1
+          }
+        }
+        //Standard backwards L shaped flipped upside down move
+        if (start.getCol() - 1 >= 0) 
+        {
+          if (b.getSquareArray()[start.getRow() - firstAxis][start.getCol() - secondAxis].isOccupied() == true)
+          {
+            if (b.getSquareArray()[start.getRow() - firstAxis][start.getCol() - secondAxis].getOccupyingPiece().getColor() != this.getColor())
+            {
+              legalMoves.add(b.getSquareArray()[start.getRow() - firstAxis][start.getCol() - secondAxis]);//row -2 col -1
+            }
+          }
+          else 
+          {
+            legalMoves.add(b.getSquareArray()[start.getRow() - firstAxis][start.getCol() - secondAxis]);//row -2 col -1
+          }
+        }
+      }
+
+    	return legalMoves;
+    }
+
+
+
+    //pre-condition: board must exist and have squares
+    //post-condition: return an arraylist of legal moves
+    public ArrayList<Square> getControlledSquares(Board b, Square start){
+      ArrayList<Square> controlledSquares = new ArrayList<Square>();
+      int firstAxis = 2;
+      int secondAxis = 1;
+      if (start.getRow() + 2 < 8) 
+      {
+        //Standard L shaped move
+        if (start.getCol() + 1 < 8) 
+        {
+          controlledSquares.add(b.getSquareArray()[start.getRow() + firstAxis][start.getCol() + secondAxis]);//row +2 col +1
+        }
+        //Standard backwards L shaped move
+        if (start.getCol() - 1 >= 0) 
+        {
+          controlledSquares.add(b.getSquareArray()[start.getRow() + firstAxis][start.getCol() - secondAxis]);//row +2 col -1
+        }
+      }
+
+      if(start.getRow() + 1 < 8)
+      {
+        //Standard backwards L shaped rotated 90 degrees clockwise move
+        if (start.getCol() + 2 < 8) 
+        {
+          controlledSquares.add(b.getSquareArray()[start.getRow() + secondAxis][start.getCol() + firstAxis]);//row +1 col +2
+        }
+        //Standard L shaped rotated 90 degrees counterclockwise move
+        if (start.getCol() - 2 >= 0) 
+        {
+          controlledSquares.add(b.getSquareArray()[start.getRow() + secondAxis][start.getCol() - firstAxis]);//row +1 col -2
+        }                    
+      }
+
+      if (start.getRow() - 1 >= 0) 
+      {
+        //Standard L shaped rotated 90 degrees clockwise move
+        if (start.getCol() + 2 < 8) 
+        {
+          controlledSquares.add(b.getSquareArray()[start.getRow() - secondAxis][start.getCol() + firstAxis]);//row -1 col +2
+        }
+        //Standard backwards L shaped rotated 90 degrees counterclockwise move
+        if (start.getCol() - 2 >= 0) 
+        {
+          controlledSquares.add(b.getSquareArray()[start.getRow() - secondAxis][start.getCol() - firstAxis]);//row -1 col -2
+        }
+      }
+
+      if (start.getRow() - 2 >= 0) 
+      {
+        //Standard L shaped flipped upside down move
+        if (start.getCol() + 1 < 8) 
+        {
+          controlledSquares.add(b.getSquareArray()[start.getRow() - firstAxis][start.getCol() + secondAxis]);//row -2 col +1
+        }
+        //Standard backwards L shaped flipped upside down move
+        if (start.getCol() - 1 >= 0) 
+        {
+          controlledSquares.add(b.getSquareArray()[start.getRow() - firstAxis][start.getCol() - secondAxis]);//row -2 col -1
+        }
+      }
+      return controlledSquares;
     }
 }

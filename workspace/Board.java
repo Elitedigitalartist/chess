@@ -1,5 +1,5 @@
-
-
+//David Sagoua Period: 2
+//This class creates the board and hold all the methods for interacting with the board
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -14,6 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 //You will be implmenting a part of a function and a whole function in this document. Please follow the directions for the 
 //suggested order of completion that should make testing easier.
@@ -63,6 +64,39 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       //for (.....)  
 //        	populate the board with squares here. Note that the board is composed of 64 squares alternating from 
 //        	white to black.
+        for (int i = 0; i < board.length; i++) 
+        {
+            for (int j = 0; j < board[i].length;j++) 
+            {
+                if ( i % 2 == 0) 
+                {
+                    if (j % 2 == 0 ) 
+                    {
+                        board[i][j] = new Square(this, true, i, j);
+                        this.add(board[i][j]);
+                    }
+                    else 
+                    {
+                        board[i][j] = new Square(this, false, i, j);
+                        this.add(board[i][j]);
+                    }
+                }
+                if ( i % 2 == 1) 
+                {
+                    if (j % 2 == 0 ) 
+                    {
+                        board[i][j] = new Square(this, false, i, j);
+                        this.add(board[i][j]);
+                    }
+                    else 
+                    {
+                        board[i][j] = new Square(this, true, i, j);
+                        this.add(board[i][j]);
+                    }
+                
+                }
+            }
+        }
 
         initializePieces();
 
@@ -81,7 +115,51 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	//it's up to you how you wish to arrange your pieces.
     private void initializePieces() {
     	
-    	board[0][0].put(new Piece(true, RESOURCES_WKING_PNG));
+        board[6][0].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][1].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][2].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][3].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][4].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][5].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][6].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][7].put(new Piece(true, RESOURCES_WPAWN_PNG));
+
+        board[7][0].put(new Piece(true, RESOURCES_WROOK_PNG));
+        board[7][7].put(new Piece(true, RESOURCES_WROOK_PNG));
+
+        board[7][2].put(new Piece(true, RESOURCES_WBISHOP_PNG));
+        board[7][5].put(new Piece(true, RESOURCES_WBISHOP_PNG));
+
+    	board[7][1].put(new Piece(true, RESOURCES_WKNIGHT_PNG));
+        board[7][6].put(new Piece(true, RESOURCES_WKNIGHT_PNG));
+
+        board[7][3].put(new Piece(true, RESOURCES_WKING_PNG));
+        board[7][4].put(new Piece(true, RESOURCES_WQUEEN_PNG));
+
+        board[1][0].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][1].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][2].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][3].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][4].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][5].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][6].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][7].put(new Piece(false, RESOURCES_BPAWN_PNG));
+
+        board[0][0].put(new Piece(false, RESOURCES_BROOK_PNG));
+        board[0][7].put(new Piece(false, RESOURCES_BROOK_PNG));
+
+        board[0][2].put(new Piece(false, RESOURCES_BBISHOP_PNG));
+        board[0][5].put(new Piece(false, RESOURCES_BBISHOP_PNG));
+        
+        
+
+        board[0][1].put(new Piece(false, RESOURCES_BKNIGHT_PNG));
+        
+        board[0][6].put(new Piece(false, RESOURCES_BKNIGHT_PNG));
+
+        board[0][4].put(new Piece(false, RESOURCES_BKING_PNG));
+        board[0][3].put(new Piece(false, RESOURCES_BQUEEN_PNG));
+        
 
     }
 
@@ -146,11 +224,29 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     //should move the piece to the desired location only if this is a legal move.
     //use the pieces "legal move" function to determine if this move is legal, then complete it by
     //moving the new piece to it's new board location. 
+
+    //pre-condition: none
+    //post-condition: removes all highlighted colors and switches the turn
     @Override
     public void mouseReleased(MouseEvent e) {
         Square endSquare = (Square) this.getComponentAt(new Point(e.getX(), e.getY()));
+
+        for (Square[] row: board)
+         {
+            for (Square s: row) 
+            {
+                s.setBorder(null);
+            }
+        }
         
         //using currPiece
+        //removes piece from orginal position to a new one
+        if (currPiece.getLegalMoves(this, fromMoveSquare).contains(endSquare)) {
+            fromMoveSquare.removePiece();
+            endSquare.put(currPiece);
+            whiteTurn = !whiteTurn;
+            
+        }
         
        
         fromMoveSquare.setDisplay(true);
@@ -158,10 +254,28 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         repaint();
     }
 
+    //pre-condition: non
+    //post-condition: highlights the legal suare and controlled squares
     @Override
     public void mouseDragged(MouseEvent e) {
         currX = e.getX() - 24;
         currY = e.getY() - 24;
+        //if the square clicked on has a piece
+        if (currPiece != null) 
+        {
+            //if piece can attack highlight in yellow
+            for (Square s: currPiece.getControlledSquares(this, fromMoveSquare)) 
+            {
+                s.setBorder(BorderFactory.createLineBorder(Color.yellow));
+            }
+            //if piece can be moved to highlight it in red
+            for (Square s: currPiece.getLegalMoves(this, fromMoveSquare)) 
+            {
+                s.setBorder(BorderFactory.createLineBorder(Color.red));
+
+            }
+            
+        }
 
         repaint();
     }
