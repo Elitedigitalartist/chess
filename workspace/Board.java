@@ -130,8 +130,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         board[7][2].put(new Piece(true, RESOURCES_WBISHOP_PNG));
         board[7][5].put(new Piece(true, RESOURCES_WBISHOP_PNG));
 
-    	board[7][1].put(new Piece(true, RESOURCES_WKNIGHT_PNG));
-        board[7][6].put(new Piece(true, RESOURCES_WKNIGHT_PNG));
+    	board[7][1].put(new Knight(true, RESOURCES_WKNIGHT_PNG));
+        board[7][6].put(new Knight(true, RESOURCES_WKNIGHT_PNG));
 
         board[7][3].put(new Piece(true, RESOURCES_WKING_PNG));
         board[7][4].put(new Piece(true, RESOURCES_WQUEEN_PNG));
@@ -153,9 +153,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         
         
 
-        board[0][1].put(new Piece(false, RESOURCES_BKNIGHT_PNG));
+        board[0][1].put(new Knight(false, RESOURCES_BKNIGHT_PNG));
         
-        board[0][6].put(new Piece(false, RESOURCES_BKNIGHT_PNG));
+        board[0][6].put(new Knight(false, RESOURCES_BKNIGHT_PNG));
 
         board[0][4].put(new Piece(false, RESOURCES_BKING_PNG));
         board[0][3].put(new Piece(false, RESOURCES_BQUEEN_PNG));
@@ -241,7 +241,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         
         //using currPiece
         //removes piece from orginal position to a new one
-        if (currPiece.getLegalMoves(this, fromMoveSquare).contains(endSquare)) {
+        if (currPiece != null && currPiece.getLegalMoves(this, fromMoveSquare).contains(endSquare)) {
             fromMoveSquare.removePiece();
             endSquare.put(currPiece);
             whiteTurn = !whiteTurn;
