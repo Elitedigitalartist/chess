@@ -82,7 +82,7 @@ public class King extends Piece {
     // list of controlled squares if it is within the bounds of the board.Finally,
     // it returns the list of controlled squares as an array.
     @Override
-    public ArrayList<Square> getControlledSquares(Board board, Square currentSquare) {
+    public ArrayList<Square> getControlledSquares(Square[][] board, Square currentSquare) {
         ArrayList<Square> controlledSquares = new ArrayList<Square>();
         // Determine the row and column of the current square
         int row = currentSquare.getRow();
@@ -95,9 +95,9 @@ public class King extends Piece {
                 continue;
             }
             // Check if the square is within the bounds of the board
-            if (row + i >= 0 && row + i < board.getSquareArray().length && col + j >= 0 && col + j < board.getSquareArray()[row].length) {
+            if (row + i >= 0 && row + i < board.length && col + j >= 0 && col + j < board[row].length) {
                 // Add the square to the list of controlled squares
-                controlledSquares.add(board.getSquareArray()[row + i][col + j]);
+                controlledSquares.add(board[row + i][col + j]);
             }
         }
     }

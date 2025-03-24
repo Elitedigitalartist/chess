@@ -124,16 +124,16 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         board[6][6].put(new Piece(true, RESOURCES_WPAWN_PNG));
         board[6][7].put(new Piece(true, RESOURCES_WPAWN_PNG));
 
-        board[7][0].put(new Piece(true, RESOURCES_WROOK_PNG));
-        board[7][7].put(new Piece(true, RESOURCES_WROOK_PNG));
+        board[7][0].put(new Rook(true, RESOURCES_WROOK_PNG));
+        board[7][7].put(new Rook(true, RESOURCES_WROOK_PNG));
 
-        board[7][2].put(new Piece(true, RESOURCES_WBISHOP_PNG));
-        board[7][5].put(new Piece(true, RESOURCES_WBISHOP_PNG));
+        board[7][2].put(new Bishop(true, RESOURCES_WBISHOP_PNG));
+        board[7][5].put(new Bishop(true, RESOURCES_WBISHOP_PNG));
 
     	board[7][1].put(new Knight(true, RESOURCES_WKNIGHT_PNG));
         board[7][6].put(new Knight(true, RESOURCES_WKNIGHT_PNG));
 
-        board[7][3].put(new Piece(true, RESOURCES_WKING_PNG));
+        board[7][3].put(new King(true, RESOURCES_WKING_PNG));
         board[7][4].put(new Piece(true, RESOURCES_WQUEEN_PNG));
 
         board[1][0].put(new Piece(false, RESOURCES_BPAWN_PNG));
@@ -145,11 +145,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         board[1][6].put(new Piece(false, RESOURCES_BPAWN_PNG));
         board[1][7].put(new Piece(false, RESOURCES_BPAWN_PNG));
 
-        board[0][0].put(new Piece(false, RESOURCES_BROOK_PNG));
-        board[0][7].put(new Piece(false, RESOURCES_BROOK_PNG));
+        board[0][0].put(new Rook(false, RESOURCES_BROOK_PNG));
+        board[0][7].put(new Rook(false, RESOURCES_BROOK_PNG));
 
-        board[0][2].put(new Piece(false, RESOURCES_BBISHOP_PNG));
-        board[0][5].put(new Piece(false, RESOURCES_BBISHOP_PNG));
+        board[0][2].put(new Bishop(false, RESOURCES_BBISHOP_PNG));
+        board[0][5].put(new Bishop(false, RESOURCES_BBISHOP_PNG));
         
         
 
@@ -157,8 +157,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         
         board[0][6].put(new Knight(false, RESOURCES_BKNIGHT_PNG));
 
-        board[0][4].put(new Piece(false, RESOURCES_BKING_PNG));
-        board[0][3].put(new Piece(false, RESOURCES_BQUEEN_PNG));
+        board[0][4].put(new King(false, RESOURCES_BKING_PNG));
+       // board[0][3].put(new Piece(false, RESOURCES_BQUEEN_PNG));
         
 
     }
@@ -264,7 +264,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         if (currPiece != null) 
         {
             //if piece can attack highlight in yellow
-            for (Square s: currPiece.getControlledSquares(this, fromMoveSquare)) 
+            for (Square s: currPiece.getControlledSquares(board, fromMoveSquare)) 
             {
                 s.setBorder(BorderFactory.createLineBorder(Color.yellow));
             }

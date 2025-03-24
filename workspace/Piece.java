@@ -45,7 +45,7 @@ public class Piece {
       return "black";
   }
 // to be implemented by each subclass
-  public ArrayList<Square> getControlledSquares(Board board, Square currentSquare) {
+  public ArrayList<Square> getControlledSquares(Square[][] board, Square currentSquare) {
     return null;
   }
 }

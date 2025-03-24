@@ -169,7 +169,7 @@ public class Knight extends Piece{
     //pre-condition: board must exist and have squares
     //post-condition: return an arraylist of controlled squares which are every two sqaures in one direction, then one square in a direction perpendicular to the original diretion that is not occupied by a piece with the same color
     @Override
-    public ArrayList<Square> getControlledSquares(Board b, Square start){
+    public ArrayList<Square> getControlledSquares(Square[][] b, Square start){
       ArrayList<Square> controlledSquares = new ArrayList<Square>();
       int firstAxis = 2;
       int secondAxis = 1;
@@ -178,12 +178,12 @@ public class Knight extends Piece{
         //Standard L shaped move
         if (start.getCol() + 1 < 8) 
         {
-          controlledSquares.add(b.getSquareArray()[start.getRow() + firstAxis][start.getCol() + secondAxis]);//row +2 col +1
+          controlledSquares.add(b[start.getRow() + firstAxis][start.getCol() + secondAxis]);//row +2 col +1
         }
         //Standard backwards L shaped move
         if (start.getCol() - 1 >= 0) 
         {
-          controlledSquares.add(b.getSquareArray()[start.getRow() + firstAxis][start.getCol() - secondAxis]);//row +2 col -1
+          controlledSquares.add(b[start.getRow() + firstAxis][start.getCol() - secondAxis]);//row +2 col -1
         }
       }
 
@@ -192,12 +192,12 @@ public class Knight extends Piece{
         //Standard backwards L shaped rotated 90 degrees clockwise move
         if (start.getCol() + 2 < 8) 
         {
-          controlledSquares.add(b.getSquareArray()[start.getRow() + secondAxis][start.getCol() + firstAxis]);//row +1 col +2
+          controlledSquares.add(b[start.getRow() + secondAxis][start.getCol() + firstAxis]);//row +1 col +2
         }
         //Standard L shaped rotated 90 degrees counterclockwise move
         if (start.getCol() - 2 >= 0) 
         {
-          controlledSquares.add(b.getSquareArray()[start.getRow() + secondAxis][start.getCol() - firstAxis]);//row +1 col -2
+          controlledSquares.add(b[start.getRow() + secondAxis][start.getCol() - firstAxis]);//row +1 col -2
         }                    
       }
 
@@ -206,12 +206,12 @@ public class Knight extends Piece{
         //Standard L shaped rotated 90 degrees clockwise move
         if (start.getCol() + 2 < 8) 
         {
-          controlledSquares.add(b.getSquareArray()[start.getRow() - secondAxis][start.getCol() + firstAxis]);//row -1 col +2
+          controlledSquares.add(b[start.getRow() - secondAxis][start.getCol() + firstAxis]);//row -1 col +2
         }
         //Standard backwards L shaped rotated 90 degrees counterclockwise move
         if (start.getCol() - 2 >= 0) 
         {
-          controlledSquares.add(b.getSquareArray()[start.getRow() - secondAxis][start.getCol() - firstAxis]);//row -1 col -2
+          controlledSquares.add(b[start.getRow() - secondAxis][start.getCol() - firstAxis]);//row -1 col -2
         }
       }
 
@@ -220,12 +220,12 @@ public class Knight extends Piece{
         //Standard L shaped flipped upside down move
         if (start.getCol() + 1 < 8) 
         {
-          controlledSquares.add(b.getSquareArray()[start.getRow() - firstAxis][start.getCol() + secondAxis]);//row -2 col +1
+          controlledSquares.add(b[start.getRow() - firstAxis][start.getCol() + secondAxis]);//row -2 col +1
         }
         //Standard backwards L shaped flipped upside down move
         if (start.getCol() - 1 >= 0) 
         {
-          controlledSquares.add(b.getSquareArray()[start.getRow() - firstAxis][start.getCol() - secondAxis]);//row -2 col -1
+          controlledSquares.add(b[start.getRow() - firstAxis][start.getCol() - secondAxis]);//row -2 col -1
         }
       }
       return controlledSquares;
