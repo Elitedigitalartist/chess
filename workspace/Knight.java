@@ -21,6 +21,7 @@ public class Knight extends Piece{
     //makes a list of all the legal moves that the piece can make
     //pre-condition: board must exist and have squares
     //post-condition: return an arraylist of legal moves for the knight which are every two sqaures in one direction, then one square in a direction perpendicular to the original diretion
+    @Override
     public ArrayList<Square> getLegalMoves(Board b, Square start){
        ArrayList<Square> legalMoves = new ArrayList<Square>();
       int firstAxis = 2;
@@ -167,6 +168,7 @@ public class Knight extends Piece{
 
     //pre-condition: board must exist and have squares
     //post-condition: return an arraylist of controlled squares which are every two sqaures in one direction, then one square in a direction perpendicular to the original diretion that is not occupied by a piece with the same color
+    @Override
     public ArrayList<Square> getControlledSquares(Board b, Square start){
       ArrayList<Square> controlledSquares = new ArrayList<Square>();
       int firstAxis = 2;
@@ -227,5 +229,9 @@ public class Knight extends Piece{
         }
       }
       return controlledSquares;
+    }
+    public String toString()
+    {
+      return "A " + super.toString() + " Knight";
     }
 }
