@@ -230,6 +230,9 @@ public class Knight extends Piece{
       }
       return controlledSquares;
     }
+    //pre condition: none
+    //post condition: return "A <color> Knight"
+  
     public String toString()
     {
       return "A " + super.toString() + " Knight";
