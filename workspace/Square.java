@@ -68,6 +68,10 @@ public class Square extends JComponent {
         this.occupyingPiece = p;
     }
     
+    public Piece getPiece() {
+        return this.occupyingPiece;
+    }
+
     public Piece removePiece() {
         Piece p = this.occupyingPiece;
         this.occupyingPiece = null;

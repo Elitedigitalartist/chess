@@ -173,7 +173,7 @@ public class Knight extends Piece{
       ArrayList<Square> controlledSquares = new ArrayList<Square>();
       int firstAxis = 2;
       int secondAxis = 1;
-      if (start.getRow() + 2 < 8) 
+      if (start.getRow() + 2 < 8)
       {
         //Standard L shaped move
         if (start.getCol() + 1 < 8) 
