@@ -134,7 +134,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         board[7][6].put(new Knight(true, RESOURCES_WKNIGHT_PNG));
 
         board[7][3].put(new King(true, RESOURCES_WKING_PNG));
-        board[7][4].put(new Piece(true, RESOURCES_WQUEEN_PNG));
+        board[7][4].put(new Queen(true, RESOURCES_WQUEEN_PNG));
 
         board[1][0].put(new Pawn(false, RESOURCES_BPAWN_PNG));
         board[1][1].put(new Pawn(false, RESOURCES_BPAWN_PNG));
@@ -159,7 +159,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         board[0][6].put(new Knight(false, RESOURCES_BKNIGHT_PNG));
 
         board[0][4].put(new King(false, RESOURCES_BKING_PNG));
-        //board[0][3].put(new Piece(false, RESOURCES_BQUEEN_PNG));
+        board[0][3].put(new Queen(false, RESOURCES_BQUEEN_PNG));
         
 
     }
