@@ -248,7 +248,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                 endSquare.put(sealedPiece);
             }
         }
-        else if (currPiece.getLegalMoves(this, fromMoveSquare).contains(endSquare) && currPiece.getColor() == whiteTurn && !isInCheck(currPiece.getColor()))
+        else if (currPiece != null && currPiece.getLegalMoves(this, fromMoveSquare).contains(endSquare) && currPiece.getColor() == whiteTurn && !isInCheck(currPiece.getColor()))
         {
             endSquare.put(currPiece);
             fromMoveSquare.put(null);
@@ -270,9 +270,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                 s.setBorder(null);
             }
         }
-    fromMoveSquare.setDisplay(true);
-    currPiece = null;
-    repaint();
+
+        if (currPiece != null){
+            fromMoveSquare.setDisplay(true);
+            currPiece = null;
+            repaint();
+        }
     }
 
     //pre-condition: non
